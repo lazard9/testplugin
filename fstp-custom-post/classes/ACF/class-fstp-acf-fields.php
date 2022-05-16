@@ -1,5 +1,7 @@
 <?php
 
+namespace FSTP\Classes\ACF;
+
 class FSTP_ACF_Fields
 {
 	public function register_fields() {

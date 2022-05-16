@@ -1,6 +1,8 @@
 <?php
 
-class FSTP_Taxonomies
+namespace FSTP\Classes;
+
+class FSTP_Custom_Taxonomy
 {
 	public function register_taxonomies() {
 		add_action( 'init', array( $this, 'fstp_custom_taxonomies' ) );

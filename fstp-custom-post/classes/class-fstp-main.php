@@ -1,5 +1,7 @@
 <?php
 
+namespace FSTP\Classes;
+
 class FSTP_Main
 {
 	public function __construct( $fileds, $post, $taxonomies ) {

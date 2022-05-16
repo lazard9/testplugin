@@ -4,6 +4,8 @@
  * Custom Post Type, single post page template and ULR structure
  */
 
+namespace FSTP\Classes;
+
 class FSTP_Custom_Post
 {
 	public function register_post() {

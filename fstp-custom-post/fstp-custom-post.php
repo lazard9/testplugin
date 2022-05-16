@@ -28,7 +28,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
 */
+
 defined( 'ABSPATH' ) or die; // Exit if accessed directly
+
+namespace FSTP\Classes;
 
 if ( ! defined( 'FSTP_PLUGIN_PATH' ) ) {
 	define( 'FSTP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
@@ -38,20 +41,9 @@ if ( ! defined( 'FSTP_PLUGIN_URL' ) ) {
 	define( 'FSTP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 
-if ( file_exists( FSTP_PLUGIN_PATH . 'classes/class-fstp-acf-fields.php' ) ) {
-	require_once FSTP_PLUGIN_PATH . 'classes/class-fstp-acf-fields.php';
-}
-
-if ( file_exists( FSTP_PLUGIN_PATH . 'classes/class-fstp-custom-post.php' ) ) {
-	require_once FSTP_PLUGIN_PATH . 'classes/class-fstp-custom-post.php';
-}
-
-if ( file_exists( FSTP_PLUGIN_PATH . 'classes/class-fstp-custom-taxonomies.php' ) ) {
-	require_once FSTP_PLUGIN_PATH . 'classes/class-fstp-custom-taxonomies.php';
-}
-
-if ( file_exists( FSTP_PLUGIN_PATH . 'classes/class-fstp-main.php' ) ) {
-	require_once FSTP_PLUGIN_PATH . 'classes/class-fstp-main.php';
+// // Include the autoloader so we can dynamically include the rest of the classes.
+if ( file_exists( FSTP_PLUGIN_PATH . 'lib/autoloader.php' ) ) {
+	require_once FSTP_PLUGIN_PATH . 'lib/autoloader.php' ;
 }
 
 /*
@@ -59,10 +51,10 @@ Description: Start FSTP Custom Post plugin.
 */
 function fstp_custom_post_start() {
 
-	$acf_fields = new FSTP_ACF_Fields();
+	$acf_fields = new ACF\FSTP_ACF_Fields();
 	$custom_post = new FSTP_Custom_Post();
-	$custom_taxonomies = new FSTP_Taxonomies();
-	$main_class = new FSTP_Main( $acf_fields, $custom_post, $custom_taxonomies );
+	$custom_taxonomy = new FSTP_Custom_Taxonomy();
+	$main_class = new FSTP_Main( $acf_fields, $custom_post, $custom_taxonomy );
 	
 	// activation
 	register_activation_hook( __FILE__, array( $main_class, 'activation_check' ) );
